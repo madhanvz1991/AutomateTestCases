@@ -1,5 +1,4 @@
-ackage com.vz.hack;
-
+package com.vz.hack;
 import static org.junit.Assert.*;
 
 import org.junit.After;
