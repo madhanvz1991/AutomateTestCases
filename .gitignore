@@ -1,0 +1,9 @@
+/target/
+<<<<<<< HEAD
+/.settings/
+.classpath
+.project
+
+=======
+/nb-configuration.xml
+>>>>>>> origin/master
