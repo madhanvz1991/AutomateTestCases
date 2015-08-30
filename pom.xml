@@ -176,10 +176,9 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
+			<!--<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<!-- <version>0.7.2.201409121644</version> -->
 				<configuration>
 					<destFile>${basedir}/target/jacoco.exec</destFile>
 					<dataFile>${basedir}/target/jacoco.exec</dataFile>
@@ -199,7 +198,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
         </plugins>
     </build>
 </project>
