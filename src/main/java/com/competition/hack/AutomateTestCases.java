@@ -1,4 +1,4 @@
-package com.vz.hack;
+package com.competition.hack;
 
 public class AutomateTestCases {
 

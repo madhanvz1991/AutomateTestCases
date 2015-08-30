@@ -1,4 +1,4 @@
-ackage com.vz.hack;
+package com.competition.hack;
 
 import static org.junit.Assert.*;
 
