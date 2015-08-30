@@ -21,30 +21,14 @@
 
   <dependencies>
    
-    <dependency>
-            <groupId>taglibs</groupId>
-            <artifactId>standard</artifactId>
-            <version>1.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>   
-        </dependency>
-
+    
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-        
+       
         <dependency>
     <groupId>com.github.javaparser</groupId>
     <artifactId>javaparser-core</artifactId>
@@ -61,7 +45,14 @@
 		<groupId>com.itextpdf</groupId>
 		<artifactId>itextpdf</artifactId>
 		<version>5.1.0</version>
-   </dependency> 
+   </dependency>
+   <dependency>
+			<groupId>org.jmockit</groupId>
+			<artifactId>jmockit</artifactId>
+			<version>1.18</version>
+			<scope>test</scope>
+		</dependency>
+
   </dependencies>
    <build>
         <finalName>devchamps</finalName>
@@ -111,20 +102,104 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
-                <configuration>
-                    <skipTests>${skip.unit.tests}</skipTests>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/*IT.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
+            			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+					<id>compile_exe</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<exportAntProperties>true</exportAntProperties>
+							<target>
+								<property name="maven.classpath" refid="maven.runtime.classpath" />
+								<echo>${maven.classpath}</echo>
+								<delete>
+								   <fileset dir="${basedir}\src\main\webapp\jacoco" erroronmissingdir="false">
+								      <include name="*"/>
+								   </fileset>
+								</delete>
+								<java classname="framework.TestFramework">
+									<classpath>
+										<pathelement path="${maven.classpath}"></pathelement>
+									</classpath>
+									<arg value="${project.source.directory}" />
+									<!-- <arg value="${failAllTest}" />  -->
+								</java>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+					<id>install_exe</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					
+					</execution>
+					<execution>
+					<id>test_exe</id>
+						<phase>test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<exportAntProperties>true</exportAntProperties>
+							<target>
+							<echo message="processing surefire" />
+								 <copy todir="${basedir}\src\main\webapp\jacoco" >
+									    <fileset dir="${basedir}\target\site\jacoco">
+									    </fileset>
+									  </copy> 
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<skipTests>${skip.unit.tests}</skipTests>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/*IT.java</exclude>
+					</excludes>
+					 <testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<!-- <version>0.7.2.201409121644</version> -->
+				<configuration>
+					<destFile>${basedir}/target/jacoco.exec</destFile>
+					<dataFile>${basedir}/target/jacoco.exec</dataFile>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-site</id>
+						<phase>package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
     </build>
 </project>
