@@ -11,7 +11,7 @@ public class AutomateTestCases {
     }
     
     public double oprMul(double a, double b){
-        return a*b;
+        return a+b;
     }
     
     public String oprStr(String a, String b){
