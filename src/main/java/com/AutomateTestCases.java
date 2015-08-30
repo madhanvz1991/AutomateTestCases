@@ -6,7 +6,7 @@ public class AutomateTestCases {
         return a+b;
     }
 	
-	public Long oprSub(long a, long b){
+	public int oprSub(int a, int b){
         return a-b;
     }
     
