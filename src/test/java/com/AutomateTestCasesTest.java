@@ -45,16 +45,5 @@ public class AutomateTestCasesTest {
         //fail("The test case is a prototype.") ;
     }
 
-    @Test
-    public void testSuccessOprAdd() {
-        System.out.println("OprAdd");
-        int a = 0;
-        int b = 0;
-        AutomateTestCases instance = new AutomateTestCases();
-        int expresult = 0;
-        int result = instance.oprAdd(a,b);
-        assertEquals(expresult, result);
-        //TODO review the generated test code and remove the default call to fail;
-        //fail("The test case is a prototype.") ;
-    }
+   
 }
