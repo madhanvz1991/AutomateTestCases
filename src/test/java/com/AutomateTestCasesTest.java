@@ -7,6 +7,19 @@ import org.junit.Test;
 public class AutomateTestCasesTest {
 
     @Test
+    public void testSuccessOprMul() {
+        System.out.println("OprMul");
+        int a = 0;
+        int b = 0;
+        AutomateTestCases instance = new AutomateTestCases();
+        int expresult = 0;
+        int result = instance.oprMul(a,b);
+        assertEquals(expresult, result);
+        //TODO review the generated test code and remove the default call to fail;
+        //fail("The test case is a prototype.") ;
+    }
+
+    @Test
     public void testSuccessOprStr() {
         System.out.println("OprStr");
         String a = null;
@@ -40,19 +53,6 @@ public class AutomateTestCasesTest {
         AutomateTestCases instance = new AutomateTestCases();
         int expresult = 0;
         int result = instance.oprAdd(a,b);
-        assertEquals(expresult, result);
-        //TODO review the generated test code and remove the default call to fail;
-        //fail("The test case is a prototype.") ;
-    }
-
-    @Test
-    public void testSuccessOprMul() {
-        System.out.println("OprMul");
-        double a = 0.0;
-        double b = 0.0;
-        AutomateTestCases instance = new AutomateTestCases();
-        double expresult = 0.0;
-        double result = instance.oprMul(a,b);
         assertEquals(expresult, result);
         //TODO review the generated test code and remove the default call to fail;
         //fail("The test case is a prototype.") ;
